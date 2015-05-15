@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `rmp` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, rmp">
+
+    <title>rmp - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'rmp', ty: 'mod', relpath: '../'};</script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>rmp</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-0' href='../src/rmp/lib.rs.html#1-117'>[src]</a></span></h1>
+<div class='docblock'>
+<h1 id="the-rust-messagepack-library" class='section-header'><a
+                           href="#the-rust-messagepack-library">The Rust MessagePack Library</a></h1>
+<p>RMP is a pure Rust <a href="http://msgpack.org">MessagePack</a> implementation.</p>
+
+<p>MessagePack is an efficient binary serialization format.</p>
+
+<p><strong>Warning</strong> this library is still in rapid development and everything may change until 1.0 comes.</p>
+
+<h2 id="usage" class='section-header'><a
+                           href="#usage">Usage</a></h2>
+<p>To use <code>rmp</code>, first add this to your <code>Cargo.toml</code>:</p>
+
+<pre><code class="language-toml">[dependencies.msgpack]
+rmp = &quot;0.1.0&quot;
+</code></pre>
+
+<p>Then, add this to your crate root:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rmp</span> <span class='kw'>as</span> <span class='ident'>msgpack</span>;
+</pre>
+
+<h2 id="features" class='section-header'><a
+                           href="#features">Features</a></h2>
+<ul>
+<li><p><strong>Convenient API</strong></p>
+
+<p>RMP is designed to be lightweight and straightforward. There are low-level API, which gives you
+full control on data encoding/decoding process and makes no heap allocations. On the other hand
+there are high-level API, which provides you convenient interface using Rust standard library and
+compiler reflection, allowing to encode/decode structures using <code>derive</code> attribute.</p></li>
+<li><p><strong>Clear error handling</strong></p>
+
+<p>RMP&#39;s error system guarantees that you never receive an error enum with unreachable variant.</p></li>
+<li><p><strong>Robust and tested</strong></p>
+
+<p>This project is developed using TDD and CI, so any found bugs will be fixed without breaking
+existing functionality.</p></li>
+</ul>
+
+<h2 id="examples" class='section-header'><a
+                           href="#examples">Examples</a></h2>
+<p>Let&#39;s try to encode a tuple of int and string.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rmp</span> <span class='kw'>as</span> <span class='ident'>msgpack</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rustc_serialize</span>;
+
+<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>Encodable</span>;
+<span class='kw'>use</span> <span class='ident'>msgpack</span>::<span class='ident'>Encoder</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>val</span> <span class='op'>=</span> (<span class='number'>42u8</span>, <span class='string'>&quot;the Answer&quot;</span>);
+
+    <span class='comment'>// The encoder borrows the bytearray buffer.</span>
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> [<span class='number'>0u8</span>; <span class='number'>13</span>];
+
+    <span class='ident'>val</span>.<span class='ident'>encode</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Encoder</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>[..]));
+
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>([<span class='number'>0x92</span>, <span class='number'>0x2a</span>, <span class='number'>0xaa</span>, <span class='number'>0x74</span>, <span class='number'>0x68</span>, <span class='number'>0x65</span>, <span class='number'>0x20</span>, <span class='number'>0x41</span>, <span class='number'>0x6e</span>, <span class='number'>0x73</span>, <span class='number'>0x77</span>, <span class='number'>0x65</span>, <span class='number'>0x72</span>], <span class='ident'>buf</span>);
+}
+</pre>
+
+<p>RMP also allows to automatically serialize/deserialize custom structures using rustc_serialize
+reflection. To enable this feature, derive RustcEncodable and RustcDecodable attributes as
+shown in the following example:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rmp</span> <span class='kw'>as</span> <span class='ident'>msgpack</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rustc_serialize</span>;
+
+<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>Encodable</span>;
+<span class='kw'>use</span> <span class='ident'>msgpack</span>::<span class='ident'>Encoder</span>;
+
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>RustcEncodable</span>)]</span>
+<span class='kw'>struct</span> <span class='ident'>Custom</span> {
+    <span class='ident'>id</span>: <span class='ident'>u32</span>,
+    <span class='ident'>key</span>: <span class='ident'>String</span>,
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>val</span> <span class='op'>=</span> <span class='ident'>Custom</span> { <span class='ident'>id</span>: <span class='number'>42u32</span>, <span class='ident'>key</span>: <span class='string'>&quot;the Answer&quot;</span>.<span class='ident'>to_string</span>() };
+
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> [<span class='number'>0u8</span>; <span class='number'>13</span>];
+
+    <span class='ident'>val</span>.<span class='ident'>encode</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Encoder</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>[..]));
+
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>([<span class='number'>0x92</span>, <span class='number'>0x2a</span>, <span class='number'>0xaa</span>, <span class='number'>0x74</span>, <span class='number'>0x68</span>, <span class='number'>0x65</span>, <span class='number'>0x20</span>, <span class='number'>0x41</span>, <span class='number'>0x6e</span>, <span class='number'>0x73</span>, <span class='number'>0x77</span>, <span class='number'>0x65</span>, <span class='number'>0x72</span>], <span class='ident'>buf</span>);
+}
+</pre>
+
+<h2 id="limitations-and-plans" class='section-header'><a
+                           href="#limitations-and-plans">Limitations and plans</a></h2>
+<ul>
+<li>Owning <code>Value</code> variant and its encoding/decoding functions.</li>
+<li>Non-owning <code>ValueRef</code> variant, which can be created from <code>[u8]</code>, <code>Cursor&lt;[u8]&gt;</code> etc. and
+borrows data from it, which makes it absolute zero-copy.</li>
+<li>Enum serialization/deserialization.</li>
+</ul>
+</div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
+<table><tr><td><code>pub use init::<a class='enum' href='../rmp/init/enum.Marker.html' title='rmp::init::Marker'>Marker</a>;</code></td></tr><tr><td><code>pub use decode::serialize::{<a class='struct' href='../rmp/decode/serialize/struct.Decoder.html' title='rmp::decode::serialize::Decoder'>Decoder</a>};</code></td></tr><tr><td><code>pub use encode::serialize::{<a class='struct' href='../rmp/encode/serialize/struct.Encoder.html' title='rmp::encode::serialize::Encoder'>Encoder</a>};</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='decode/index.html'
+                               title='rmp::decode'>decode</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='encode/index.html'
+                               title='rmp::encode'>encode</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='init/index.html'
+                               title='rmp::init'>init</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.MSGPACK_VERSION.html'
+                               title='rmp::MSGPACK_VERSION'>MSGPACK_VERSION</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "rmp";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
