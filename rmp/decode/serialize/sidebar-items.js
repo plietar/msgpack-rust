@@ -1,1 +1,1 @@
-initSidebarItems({"type":[["Result",""]],"struct":[["Decoder",""]],"enum":[["Error","Unstable: docs; incomplete"]]});
+initSidebarItems({"enum":[["Error","Unstable: docs; incomplete"]],"struct":[["Decoder",""]],"type":[["Result",""]]});

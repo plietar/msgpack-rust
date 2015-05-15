@@ -1,1 +1,1 @@
-initSidebarItems({"constant":[["MSGPACK_VERSION",""]],"mod":[["decode",""],["encode",""],["init",""]]});
+initSidebarItems({"constant":[["MSGPACK_VERSION",""]],"enum":[["Marker",""]],"mod":[["decode",""],["encode",""]]});

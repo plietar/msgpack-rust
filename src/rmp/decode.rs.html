@@ -1339,6 +1339,36 @@
 <span id="1297">1297</span>
 <span id="1298">1298</span>
 <span id="1299">1299</span>
+<span id="1300">1300</span>
+<span id="1301">1301</span>
+<span id="1302">1302</span>
+<span id="1303">1303</span>
+<span id="1304">1304</span>
+<span id="1305">1305</span>
+<span id="1306">1306</span>
+<span id="1307">1307</span>
+<span id="1308">1308</span>
+<span id="1309">1309</span>
+<span id="1310">1310</span>
+<span id="1311">1311</span>
+<span id="1312">1312</span>
+<span id="1313">1313</span>
+<span id="1314">1314</span>
+<span id="1315">1315</span>
+<span id="1316">1316</span>
+<span id="1317">1317</span>
+<span id="1318">1318</span>
+<span id="1319">1319</span>
+<span id="1320">1320</span>
+<span id="1321">1321</span>
+<span id="1322">1322</span>
+<span id="1323">1323</span>
+<span id="1324">1324</span>
+<span id="1325">1325</span>
+<span id="1326">1326</span>
+<span id="1327">1327</span>
+<span id="1328">1328</span>
+<span id="1329">1329</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='ident'>Read</span>, <span class='ident'>Cursor</span>};
@@ -2014,6 +2044,8 @@
 <span class='doccomment'>/// According to the MessagePack specification, the string format family stores an byte array in 1,</span>
 <span class='doccomment'>/// 2, 3, or 5 bytes of extra bytes in addition to the size of the byte array.</span>
 <span class='doccomment'>///</span>
+<span class='doccomment'>/// # Errors</span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// This function will return `ValueReadError` on any I/O error while reading either the marker or</span>
 <span class='doccomment'>/// the data.</span>
 <span class='doccomment'>///</span>
@@ -2220,6 +2252,7 @@
 }
 
 <span class='comment'>// TODO: Docs, error cases, type mismatch, unsufficient bytes, extra bytes</span>
+<span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
 <span class='kw'>fn</span> <span class='ident'>read_fixext8</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(<span class='ident'>i8</span>, [<span class='ident'>u8</span>; <span class='number'>8</span>]), <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
@@ -2237,22 +2270,49 @@
     }
 }
 
-<span class='comment'>// TODO: Docs, error cases, type mismatch, unsufficient bytes, extra bytes</span>
-<span class='kw'>fn</span> <span class='ident'>read_fixext16</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(<span class='ident'>i8</span>, [<span class='ident'>u8</span>; <span class='number'>16</span>]), <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
+<span class='doccomment'>/// Attempts to read exactly 18 bytes from the given reader and interpret them as a fixext16 type</span>
+<span class='doccomment'>/// with data attached.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// According to the MessagePack specification, a fixext16 stores an integer and a byte array whose</span>
+<span class='doccomment'>/// length is 16 bytes. Its marker byte is `0xd8`.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Note, that this function copies a byte array from the reader to the output buffer, which is</span>
+<span class='doccomment'>/// unlikely if you want zero-copy functionality.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Errors</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// This function will return `ValueReadError` on any I/O error while reading either the marker or</span>
+<span class='doccomment'>/// the data.</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_fixext16</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(<span class='ident'>i8</span>, [<span class='ident'>u8</span>; <span class='number'>16</span>]), <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>FixExt16</span> <span class='op'>=&gt;</span> {
             <span class='kw'>let</span> <span class='ident'>id</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i8</span>(<span class='ident'>rd</span>));
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>out</span> <span class='op'>=</span> [<span class='number'>0u8</span>; <span class='number'>16</span>];
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>16</span>];
 
-            <span class='kw'>match</span> <span class='ident'>io</span>::<span class='ident'>copy</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>rd</span>.<span class='ident'>take</span>(<span class='number'>16</span>), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>out</span>[..]) {
-                <span class='prelude-val'>Ok</span>(<span class='number'>16</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>((<span class='ident'>id</span>, <span class='ident'>out</span>)),
-                _ <span class='op'>=&gt;</span> <span class='macro'>unimplemented</span><span class='macro'>!</span>()
+            <span class='kw'>match</span> <span class='ident'>read_full</span>(<span class='ident'>rd</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>) {
+                <span class='prelude-val'>Ok</span>(())   <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>((<span class='ident'>id</span>, <span class='ident'>buf</span>)),
+                <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>InvalidDataRead</span>(<span class='ident'>err</span>)),
             }
         }
         <span class='ident'>marker</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>))
     }
+}
+
+<span class='kw'>fn</span> <span class='ident'>read_full</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>ReadError</span><span class='op'>&gt;</span> {
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>nread</span> <span class='op'>=</span> <span class='number'>0usize</span>;
+
+    <span class='kw'>while</span> <span class='ident'>nread</span> <span class='op'>&lt;</span> <span class='ident'>buf</span>.<span class='ident'>len</span>() {
+        <span class='kw'>match</span> <span class='ident'>rd</span>.<span class='ident'>read</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>[<span class='ident'>nread</span>..]) {
+            <span class='prelude-val'>Ok</span>(<span class='number'>0</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ReadError</span>::<span class='ident'>UnexpectedEOF</span>),
+            <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> <span class='ident'>nread</span> <span class='op'>+=</span> <span class='ident'>n</span>,
+            <span class='prelude-val'>Err</span>(<span class='kw-2'>ref</span> <span class='ident'>err</span>) <span class='kw'>if</span> <span class='ident'>err</span>.<span class='ident'>kind</span>() <span class='op'>==</span> <span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>Interrupted</span> <span class='op'>=&gt;</span> {},
+            <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>err</span>))
+        }
+    }
+
+    <span class='prelude-val'>Ok</span>(())
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
