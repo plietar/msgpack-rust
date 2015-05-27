@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Encoder","Represents MessagePack serialization implementation."]],"enum":[["Error",""]]});
+initSidebarItems({"enum":[["Error",""]],"struct":[["Encoder","Represents MessagePack serialization implementation."]]});

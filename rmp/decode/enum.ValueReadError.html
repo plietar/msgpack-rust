@@ -41,9 +41,11 @@
     </nav>
 
     <section id='main' class="content enum">
-<h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>rmp</a>::<wbr><a href='index.html'>decode</a>::<wbr><a class='enum' href=''>ValueReadError</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-5235' href='../../src/rmp/decode.rs.html#92-99'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>rmp</a>::<wbr><a href='index.html'>decode</a>::<wbr><a class='enum' href=''>ValueReadError</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-5760' class='srclink' href='../../src/rmp/decode.rs.html#92-99' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum ValueReadError {
     InvalidMarkerRead(<a class='enum' href='../../rmp/decode/enum.ReadError.html' title='rmp::decode::ReadError'>ReadError</a>),
     InvalidDataRead(<a class='enum' href='../../rmp/decode/enum.ReadError.html' title='rmp::decode::ReadError'>ReadError</a>),
@@ -51,11 +53,11 @@
 }</pre><div class='docblock'><p>Represents an error that can occur when attempting to read a MessagePack&#39;ed complex value from
 the reader.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.InvalidMarkerRead'><a class='stability Unmarked' title='No stability level'></a><code>InvalidMarkerRead</code></td><td><div class='docblock'><p>Failed to read the marker.</p>
-</div></td></tr><tr><td id='variant.InvalidDataRead'><a class='stability Unmarked' title='No stability level'></a><code>InvalidDataRead</code></td><td><div class='docblock'><p>Failed to read the data.</p>
-</div></td></tr><tr><td id='variant.TypeMismatch'><a class='stability Unmarked' title='No stability level'></a><code>TypeMismatch</code></td><td><div class='docblock'><p>The type decoded isn&#39;t match with the expected one.</p>
-</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;<a class='enum' href='../../rmp/decode/enum.MarkerReadError.html' title='rmp::decode::MarkerReadError'>MarkerReadError</a>&gt; for <a class='enum' href='../../rmp/decode/enum.ValueReadError.html' title='rmp::decode::ValueReadError'>ValueReadError</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(err: <a class='enum' href='../../rmp/decode/enum.MarkerReadError.html' title='rmp::decode::MarkerReadError'>MarkerReadError</a>) -&gt; <a class='enum' href='../../rmp/decode/enum.ValueReadError.html' title='rmp::decode::ValueReadError'>ValueReadError</a></code></h4>
-</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../rmp/decode/enum.ValueReadError.html' title='rmp::decode::ValueReadError'>ValueReadError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<table><tr><td id='variant.InvalidMarkerRead'><code>InvalidMarkerRead</code></td><td><div class='docblock'><p>Failed to read the marker.</p>
+</div></td></tr><tr><td id='variant.InvalidDataRead'><code>InvalidDataRead</code></td><td><div class='docblock'><p>Failed to read the data.</p>
+</div></td></tr><tr><td id='variant.TypeMismatch'><code>TypeMismatch</code></td><td><div class='docblock'><p>The type decoded isn&#39;t match with the expected one.</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;<a class='enum' href='../../rmp/decode/enum.MarkerReadError.html' title='rmp::decode::MarkerReadError'>MarkerReadError</a>&gt; for <a class='enum' href='../../rmp/decode/enum.ValueReadError.html' title='rmp::decode::ValueReadError'>ValueReadError</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(err: <a class='enum' href='../../rmp/decode/enum.MarkerReadError.html' title='rmp::decode::MarkerReadError'>MarkerReadError</a>) -&gt; <a class='enum' href='../../rmp/decode/enum.ValueReadError.html' title='rmp::decode::ValueReadError'>ValueReadError</a></code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../rmp/decode/enum.ValueReadError.html' title='rmp::decode::ValueReadError'>ValueReadError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -88,6 +90,10 @@ the reader.</p>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

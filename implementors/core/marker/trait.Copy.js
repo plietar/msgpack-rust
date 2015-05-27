@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors['rmp'] = ["<a class='stability Stable' title='Stable'></a>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='rmp/enum.Marker.html' title='rmp::Marker'>Marker</a>",];
+implementors['rmp'] = ["impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='rmp/enum.Marker.html' title='rmp::Marker'>Marker</a>",];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

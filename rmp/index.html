@@ -41,9 +41,11 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>rmp</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/rmp/lib.rs.html#1-117'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>rmp</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-0' class='srclink' href='../src/rmp/lib.rs.html#1-119' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'>
 <h1 id="the-rust-messagepack-library" class='section-header'><a
                            href="#the-rust-messagepack-library">The Rust MessagePack Library</a></h1>
@@ -57,8 +59,8 @@
                            href="#usage">Usage</a></h2>
 <p>To use <code>rmp</code>, first add this to your <code>Cargo.toml</code>:</p>
 
-<pre><code class="language-toml">[dependencies.msgpack]
-rmp = &quot;0.1.0&quot;
+<pre><code class="language-toml">[dependencies.rmp]
+rmp = &quot;0.2.0&quot;
 </code></pre>
 
 <p>Then, add this to your crate root:</p>
@@ -136,7 +138,6 @@ shown in the following example:</p>
 <h2 id="limitations-and-plans" class='section-header'><a
                            href="#limitations-and-plans">Limitations and plans</a></h2>
 <ul>
-<li>Owning <code>Value</code> variant and its encoding/decoding functions.</li>
 <li>Non-owning <code>ValueRef</code> variant, which can be created from <code>[u8]</code>, <code>Cursor&lt;[u8]&gt;</code> etc. and
 borrows data from it, which makes it absolute zero-copy.</li>
 <li>Enum serialization/deserialization.</li>
@@ -144,30 +145,38 @@ borrows data from it, which makes it absolute zero-copy.</li>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use decode::serialize::{<a class='struct' href='../rmp/decode/serialize/struct.Decoder.html' title='rmp::decode::serialize::Decoder'>Decoder</a>};</code></td></tr><tr><td><code>pub use encode::serialize::{<a class='struct' href='../rmp/encode/serialize/struct.Encoder.html' title='rmp::encode::serialize::Encoder'>Encoder</a>};</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='decode/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='decode/index.html'
                                title='rmp::decode'>decode</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'>
+                             
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='encode/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='encode/index.html'
                                title='rmp::encode'>encode</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'>
+                             
+                        </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Marker.html'
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.Marker.html'
                                title='rmp::Marker'>Marker</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'>
+                             
+                        </td>
                     </tr>
                 </table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.MSGPACK_VERSION.html'
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.MSGPACK_VERSION.html'
                                title='rmp::MSGPACK_VERSION'>MSGPACK_VERSION</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'>
+                             
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>
@@ -201,6 +210,10 @@ borrows data from it, which makes it absolute zero-copy.</li>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

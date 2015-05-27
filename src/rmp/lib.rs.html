@@ -163,7 +163,6 @@
 <span id="121">121</span>
 <span id="122">122</span>
 <span id="123">123</span>
-<span id="124">124</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # The Rust MessagePack Library</span>
 <span class='doccomment'>//!</span>
@@ -178,8 +177,8 @@
 <span class='doccomment'>//! To use `rmp`, first add this to your `Cargo.toml`:</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```toml</span>
-<span class='doccomment'>//! [dependencies.msgpack]</span>
-<span class='doccomment'>//! rmp = &quot;0.1.0&quot;</span>
+<span class='doccomment'>//! [dependencies.rmp]</span>
+<span class='doccomment'>//! rmp = &quot;0.2.0&quot;</span>
 <span class='doccomment'>//! ```</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! Then, add this to your crate root:</span>
@@ -259,7 +258,6 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ## Limitations and plans</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! - Owning `Value` variant and its encoding/decoding functions.</span>
 <span class='doccomment'>//! - Non-owning `ValueRef` variant, which can be created from `[u8]`, `Cursor&lt;[u8]&gt;` etc. and</span>
 <span class='doccomment'>//!   borrows data from it, which makes it absolute zero-copy.</span>
 <span class='doccomment'>//! - Enum serialization/deserialization.</span>
@@ -284,7 +282,7 @@
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>decode</span>;
 
 <span class='comment'>// TODO: Not ready yet.</span>
-<span class='comment'>// pub mod value;</span>
+<span class='kw'>mod</span> <span class='ident'>value</span>;
 
 <span class='comment'>// Suppressed due to instability.</span>
 <span class='comment'>// #[cfg(test)]</span>
@@ -322,6 +320,10 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

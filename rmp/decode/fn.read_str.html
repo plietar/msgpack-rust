@@ -41,9 +41,11 @@
     </nav>
 
     <section id='main' class="content fn">
-<h1 class='fqn'><span class='in-band'>Function <a href='../index.html'>rmp</a>::<wbr><a href='index.html'>decode</a>::<wbr><a class='fn' href=''>read_str</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-7455' href='../../src/rmp/decode.rs.html#722-733'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Function <a href='../index.html'>rmp</a>::<wbr><a href='index.html'>decode</a>::<wbr><a class='fn' href=''>read_str</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-7980' class='srclink' href='../../src/rmp/decode.rs.html#722-733' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn read_str&lt;'r, R&gt;(rd: &amp;mut R, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'r mut [</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;&amp;'r <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, <a class='enum' href='../../rmp/decode/enum.DecodeStringError.html' title='rmp::decode::DecodeStringError'>DecodeStringError</a>&lt;'r&gt;&gt; <span class='where'>where R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a></span></pre><div class='docblock'><p>Attempts to read a string data from the given reader and copy it to the buffer provided.</p>
 
 <p>On success returns a borrowed string type, allowing to view the copyed bytes as properly utf-8
@@ -106,6 +108,10 @@ with a size of bytes actually copyed to be able to get them from <code>out</code
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

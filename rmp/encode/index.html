@@ -41,203 +41,265 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>rmp</a>::<wbr><a class='mod' href=''>encode</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-1487' href='../../src/rmp/encode.rs.html#1-927'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>rmp</a>::<wbr><a class='mod' href=''>encode</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-1487' class='srclink' href='../../src/rmp/encode.rs.html#1-1033' title='goto source code'>[src]</a></span></h1>
 <h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='serialize/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='serialize/index.html'
                                title='rmp::encode::serialize'>serialize</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='value/index.html'
+                               title='rmp::encode::value'>value</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.FixedValueWriteError.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.FixedValueWriteError.html'
                                title='rmp::encode::FixedValueWriteError'>FixedValueWriteError</a></td>
-                        <td class='docblock short'><p>Represents an error that can occur when attempting to write MessagePack&#39;ed single-byte value.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Represents an error that can occur when attempting to write MessagePack&#39;ed single-byte value.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.MarkerWriteError.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.MarkerWriteError.html'
                                title='rmp::encode::MarkerWriteError'>MarkerWriteError</a></td>
-                        <td class='docblock short'><p>Represents an error that can occur when attempting to write marker into the write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Represents an error that can occur when attempting to write marker into the write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.WriteError.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.WriteError.html'
                                title='rmp::encode::WriteError'>WriteError</a></td>
-                        <td class='docblock short'><p>Represents an error that can occur when attempting to write MessagePack&#39;ed value into the write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Represents an error that can occur when attempting to write MessagePack&#39;ed value into the write.</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.ValueWriteError.html'
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.ValueWriteError.html'
                                title='rmp::encode::ValueWriteError'>ValueWriteError</a></td>
-                        <td class='docblock short'><p>Represents an error that can occur when attempring to write MessagePack&#39;ed complex value into
+                        <td class='docblock short'>
+                             <p>Represents an error that can occur when attempring to write MessagePack&#39;ed complex value into
 the write.</p>
-</td>
+
+                        </td>
                     </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_array_len.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_array_len.html'
                                title='rmp::encode::write_array_len'>write_array_len</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write the most efficient array length implementation to the given write,
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write the most efficient array length implementation to the given write,
 returning the marker used.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_bin_len.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_bin_len.html'
                                title='rmp::encode::write_bin_len'>write_bin_len</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write the most efficient binary array length implementation to the given
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write the most efficient binary array length implementation to the given
 write, returning the marker used.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_bool.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_bool.html'
                                title='rmp::encode::write_bool'>write_bool</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write a bool value into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write a bool value into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_ext_meta.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_ext_meta.html'
                                title='rmp::encode::write_ext_meta'>write_ext_meta</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write the most efficient ext metadata implementation to the given
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write the most efficient ext metadata implementation to the given
 write, returning the marker used.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_f32.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_f32.html'
                                title='rmp::encode::write_f32'>write_f32</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>f32</code> value as a 5-byte sequence into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>f32</code> value as a 5-byte sequence into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_f64.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_f64.html'
                                title='rmp::encode::write_f64'>write_f64</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>f64</code> value as a 9-byte sequence into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>f64</code> value as a 9-byte sequence into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_i16.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_i16.html'
                                title='rmp::encode::write_i16'>write_i16</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>i16</code> value as a 3-byte sequence into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>i16</code> value as a 3-byte sequence into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_i32.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_i32.html'
                                title='rmp::encode::write_i32'>write_i32</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>i32</code> value as a 5-byte sequence into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>i32</code> value as a 5-byte sequence into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_i64.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_i64.html'
                                title='rmp::encode::write_i64'>write_i64</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>i64</code> value as a 9-byte sequence into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>i64</code> value as a 9-byte sequence into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_i8.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_i8.html'
                                title='rmp::encode::write_i8'>write_i8</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>i8</code> value as a 2-byte sequence into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>i8</code> value as a 2-byte sequence into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_map_len.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_map_len.html'
                                title='rmp::encode::write_map_len'>write_map_len</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write the most efficient map length implementation to the given write,
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write the most efficient map length implementation to the given write,
 returning the marker used.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_nfix.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_nfix.html'
                                title='rmp::encode::write_nfix'>write_nfix</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write a negative small integer value as a negative fixnum into the
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write a negative small integer value as a negative fixnum into the
 given write.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_nil.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_nil.html'
                                title='rmp::encode::write_nil'>write_nil</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write a nil value into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write a nil value into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_pfix.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_pfix.html'
                                title='rmp::encode::write_pfix'>write_pfix</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an unsigned small integer value as a positive fixint into the
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an unsigned small integer value as a positive fixint into the
 given write.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_sint.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_sint.html'
                                title='rmp::encode::write_sint'>write_sint</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>i64</code> value into the given write using the most efficient
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>i64</code> value into the given write using the most efficient
 representation, returning the marker used.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_str_len.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_str_len.html'
                                title='rmp::encode::write_str_len'>write_str_len</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write the most efficient string length implementation to the given
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write the most efficient string length implementation to the given
 write, returning the marker used.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_u16.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_u16.html'
                                title='rmp::encode::write_u16'>write_u16</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>u16</code> value strictly as a 3-byte sequence into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>u16</code> value strictly as a 3-byte sequence into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_u32.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_u32.html'
                                title='rmp::encode::write_u32'>write_u32</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>u32</code> value strictly as a 5-byte sequence into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>u32</code> value strictly as a 5-byte sequence into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_u64.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_u64.html'
                                title='rmp::encode::write_u64'>write_u64</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>u64</code> value strictly as a 9-byte sequence into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>u64</code> value strictly as a 9-byte sequence into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_u8.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_u8.html'
                                title='rmp::encode::write_u8'>write_u8</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>u8</code> value as a 2-byte sequence into the given write.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>u8</code> value as a 2-byte sequence into the given write.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.write_uint.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_uint.html'
                                title='rmp::encode::write_uint'>write_uint</a></td>
-                        <td class='docblock short'><p>Encodes and attempts to write an <code>u64</code> value into the given write using the most efficient
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write an <code>u64</code> value into the given write using the most efficient
 representation, returning the marker used.</p>
-</td>
+
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>
@@ -271,6 +333,10 @@ representation, returning the marker used.</p>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

@@ -41,9 +41,11 @@
     </nav>
 
     <section id='main' class="content fn">
-<h1 class='fqn'><span class='in-band'>Function <a href='../index.html'>rmp</a>::<wbr><a href='index.html'>encode</a>::<wbr><a class='fn' href=''>write_uint</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-2603' href='../../src/rmp/encode.rs.html#414-432'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Function <a href='../index.html'>rmp</a>::<wbr><a href='index.html'>encode</a>::<wbr><a class='fn' href=''>write_uint</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-2596' class='srclink' href='../../src/rmp/encode.rs.html#414-432' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn write_uint&lt;W&gt;(wr: &amp;mut W, val: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='../../rmp/enum.Marker.html' title='rmp::Marker'>Marker</a>, <a class='enum' href='../../rmp/encode/enum.ValueWriteError.html' title='rmp::encode::ValueWriteError'>ValueWriteError</a>&gt; <span class='where'>where W: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Write.html' title='std::io::Write'>Write</a></span></pre><div class='docblock'><p>Encodes and attempts to write an <code>u64</code> value into the given write using the most efficient
 representation, returning the marker used.</p>
 
@@ -89,6 +91,10 @@ marker or the data.</p>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>
