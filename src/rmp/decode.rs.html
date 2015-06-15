@@ -1733,6 +1733,41 @@
 <span id="1691">1691</span>
 <span id="1692">1692</span>
 <span id="1693">1693</span>
+<span id="1694">1694</span>
+<span id="1695">1695</span>
+<span id="1696">1696</span>
+<span id="1697">1697</span>
+<span id="1698">1698</span>
+<span id="1699">1699</span>
+<span id="1700">1700</span>
+<span id="1701">1701</span>
+<span id="1702">1702</span>
+<span id="1703">1703</span>
+<span id="1704">1704</span>
+<span id="1705">1705</span>
+<span id="1706">1706</span>
+<span id="1707">1707</span>
+<span id="1708">1708</span>
+<span id="1709">1709</span>
+<span id="1710">1710</span>
+<span id="1711">1711</span>
+<span id="1712">1712</span>
+<span id="1713">1713</span>
+<span id="1714">1714</span>
+<span id="1715">1715</span>
+<span id="1716">1716</span>
+<span id="1717">1717</span>
+<span id="1718">1718</span>
+<span id="1719">1719</span>
+<span id="1720">1720</span>
+<span id="1721">1721</span>
+<span id="1722">1722</span>
+<span id="1723">1723</span>
+<span id="1724">1724</span>
+<span id="1725">1725</span>
+<span id="1726">1726</span>
+<span id="1727">1727</span>
+<span id="1728">1728</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>Read</span>;
@@ -1953,36 +1988,79 @@
     }
 }
 
-<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>make_read_data_fn</span> {
-    (<span class='ident'>deduce</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>reader</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>:<span class='ident'>ident</span>, <span class='number'>0</span>)
-        <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>reader</span>.<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>(););
-    (<span class='ident'>deduce</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>reader</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>:<span class='ident'>ident</span>, <span class='number'>1</span>)
-        <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>reader</span>.<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>::<span class='op'>&lt;</span><span class='ident'>byteorder</span>::<span class='ident'>BigEndian</span><span class='op'>&gt;</span>(););
-    (<span class='ident'>gen</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>t</span>:<span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>d</span>:<span class='ident'>tt</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> {
-        <span class='kw'>fn</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>t</span>, <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
-            <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
-        {
-            <span class='kw'>match</span> <span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>deduce</span>, <span class='ident'>rd</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>d</span>) {
-                <span class='prelude-val'>Ok</span>(<span class='ident'>data</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>data</span>),
-                <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>InvalidDataRead</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>err</span>))),
-            }
-        }
-    };
-    (<span class='ident'>u8</span>,    <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> (<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>gen</span>, <span class='ident'>u8</span>, <span class='number'>0</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>););
-    (<span class='ident'>i8</span>,    <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> (<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>gen</span>, <span class='ident'>i8</span>, <span class='number'>0</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>););
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>t</span>:<span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> (<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>gen</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>t</span>, <span class='number'>1</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>decoder</span>););
+<span class='kw'>trait</span> <span class='ident'>BigEndianRead</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw'>Self</span>, <span class='ident'>byteorder</span>::<span class='ident'>Error</span><span class='op'>&gt;</span>;
 }
 
-<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>u8</span>,  <span class='ident'>read_data_u8</span>,  <span class='ident'>read_u8</span>);
-<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>u16</span>, <span class='ident'>read_data_u16</span>, <span class='ident'>read_u16</span>);
-<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>u32</span>, <span class='ident'>read_data_u32</span>, <span class='ident'>read_u32</span>);
-<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>u64</span>, <span class='ident'>read_data_u64</span>, <span class='ident'>read_u64</span>);
-<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>i8</span>,  <span class='ident'>read_data_i8</span>,  <span class='ident'>read_i8</span>);
-<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>i16</span>, <span class='ident'>read_data_i16</span>, <span class='ident'>read_i16</span>);
-<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>i32</span>, <span class='ident'>read_data_i32</span>, <span class='ident'>read_i32</span>);
-<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>i64</span>, <span class='ident'>read_data_i64</span>, <span class='ident'>read_i64</span>);
-<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>f32</span>, <span class='ident'>read_data_f32</span>, <span class='ident'>read_f32</span>);
-<span class='macro'>make_read_data_fn</span><span class='macro'>!</span>(<span class='ident'>f64</span>, <span class='ident'>read_data_f64</span>, <span class='ident'>read_f64</span>);
+<span class='kw'>impl</span> <span class='ident'>BigEndianRead</span> <span class='kw'>for</span> <span class='ident'>u8</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u8</span>, <span class='ident'>byteorder</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='ident'>rd</span>.<span class='ident'>read_u8</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>BigEndianRead</span> <span class='kw'>for</span> <span class='ident'>u16</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span>, <span class='ident'>byteorder</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='ident'>rd</span>.<span class='ident'>read_u16</span>::<span class='op'>&lt;</span><span class='ident'>byteorder</span>::<span class='ident'>BigEndian</span><span class='op'>&gt;</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>BigEndianRead</span> <span class='kw'>for</span> <span class='ident'>u32</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u32</span>, <span class='ident'>byteorder</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='ident'>rd</span>.<span class='ident'>read_u32</span>::<span class='op'>&lt;</span><span class='ident'>byteorder</span>::<span class='ident'>BigEndian</span><span class='op'>&gt;</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>BigEndianRead</span> <span class='kw'>for</span> <span class='ident'>u64</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span>, <span class='ident'>byteorder</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='ident'>rd</span>.<span class='ident'>read_u64</span>::<span class='op'>&lt;</span><span class='ident'>byteorder</span>::<span class='ident'>BigEndian</span><span class='op'>&gt;</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>BigEndianRead</span> <span class='kw'>for</span> <span class='ident'>i8</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i8</span>, <span class='ident'>byteorder</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='ident'>rd</span>.<span class='ident'>read_i8</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>BigEndianRead</span> <span class='kw'>for</span> <span class='ident'>i16</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i16</span>, <span class='ident'>byteorder</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='ident'>rd</span>.<span class='ident'>read_i16</span>::<span class='op'>&lt;</span><span class='ident'>byteorder</span>::<span class='ident'>BigEndian</span><span class='op'>&gt;</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>BigEndianRead</span> <span class='kw'>for</span> <span class='ident'>i32</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i32</span>, <span class='ident'>byteorder</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='ident'>rd</span>.<span class='ident'>read_i32</span>::<span class='op'>&lt;</span><span class='ident'>byteorder</span>::<span class='ident'>BigEndian</span><span class='op'>&gt;</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>BigEndianRead</span> <span class='kw'>for</span> <span class='ident'>i64</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span>, <span class='ident'>byteorder</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='ident'>rd</span>.<span class='ident'>read_i64</span>::<span class='op'>&lt;</span><span class='ident'>byteorder</span>::<span class='ident'>BigEndian</span><span class='op'>&gt;</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>BigEndianRead</span> <span class='kw'>for</span> <span class='ident'>f32</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f32</span>, <span class='ident'>byteorder</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='ident'>rd</span>.<span class='ident'>read_f32</span>::<span class='op'>&lt;</span><span class='ident'>byteorder</span>::<span class='ident'>BigEndian</span><span class='op'>&gt;</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>BigEndianRead</span> <span class='kw'>for</span> <span class='ident'>f64</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f64</span>, <span class='ident'>byteorder</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='ident'>rd</span>.<span class='ident'>read_f64</span>::<span class='op'>&lt;</span><span class='ident'>byteorder</span>::<span class='ident'>BigEndian</span><span class='op'>&gt;</span>()
+    }
+}
+
+<span class='kw'>fn</span> <span class='ident'>read_numeric_data</span><span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>D</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>D</span>, <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
+    <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>,
+          <span class='ident'>D</span>: <span class='ident'>BigEndianRead</span>
+{
+    <span class='kw'>match</span> <span class='ident'>D</span>::<span class='ident'>read</span>(<span class='ident'>rd</span>) {
+        <span class='prelude-val'>Ok</span>(<span class='ident'>data</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>data</span>),
+        <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>InvalidDataRead</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>err</span>))),
+    }
+}
 
 <span class='doccomment'>/// Attempts to read exactly 2 bytes from the given reader and to decode them as `u8` value.</span>
 <span class='doccomment'>///</span>
@@ -1999,7 +2077,7 @@
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>U8</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>U8</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
         <span class='ident'>marker</span>     <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2019,7 +2097,7 @@
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>U16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>U16</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2039,7 +2117,7 @@
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>U32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>U32</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2059,7 +2137,7 @@
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>U64</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u64</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>U64</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2079,7 +2157,7 @@
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>I8</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i8</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>I8</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
         <span class='ident'>marker</span>     <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2099,7 +2177,7 @@
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>I16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i16</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>I16</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2119,7 +2197,7 @@
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>I32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i32</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>I32</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2139,7 +2217,7 @@
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>I64</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i64</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>I64</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2164,7 +2242,7 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>PositiveFixnum</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>val</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>U8</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>U8</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>     <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2189,8 +2267,8 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>PositiveFixnum</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>val</span> <span class='kw'>as</span> <span class='ident'>u16</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>U8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u16</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>U16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>U8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u16</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>U16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2215,9 +2293,9 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>PositiveFixnum</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>val</span> <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>U8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>U16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>U32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>U8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>u32</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>U16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>U32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2245,10 +2323,10 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>PositiveFixnum</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>val</span> <span class='kw'>as</span> <span class='ident'>u64</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>U8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>u64</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>U16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u64</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>U32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u64</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>U64</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u64</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>U8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>u64</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>U16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u64</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>U32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u32</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u64</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>U64</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2273,7 +2351,7 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>NegativeFixnum</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>val</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>I8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i8</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>I8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2298,8 +2376,8 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>NegativeFixnum</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>val</span> <span class='kw'>as</span> <span class='ident'>i16</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>I8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i8</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i16</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>I16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i16</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>I8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>i8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i16</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>I16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2324,9 +2402,9 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>NegativeFixnum</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>val</span> <span class='kw'>as</span> <span class='ident'>i32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>I8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i8</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>i32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>I16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>I32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i32</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>I8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>i8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>i32</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>I16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>i16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i32</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>I32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2354,10 +2432,10 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>NegativeFixnum</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>val</span> <span class='kw'>as</span> <span class='ident'>i64</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>I8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i8</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>i64</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>I16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i64</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>I32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i32</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i64</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>I64</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i64</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>I8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>i8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>i64</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>I16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>i16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i64</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>I32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>i32</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i64</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>I64</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
     }
 }
@@ -2377,7 +2455,7 @@
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>F32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_f32</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>F32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>))
     }
 }
@@ -2397,7 +2475,7 @@
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>F64</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_f64</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>F64</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>))
     }
 }
@@ -2420,9 +2498,9 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>FixedString</span>(<span class='ident'>size</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>size</span> <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>Str8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>Str16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>Str32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>Str8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>u32</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>Str16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>Str32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>        <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>))
     }
 }
@@ -2475,31 +2553,15 @@
 
     <span class='comment'>// Trying to copy exact `len` bytes.</span>
     <span class='kw'>match</span> <span class='ident'>read_full</span>(<span class='ident'>rd</span>, <span class='ident'>buf</span>) {
-        <span class='prelude-val'>Ok</span>(()) <span class='op'>=&gt;</span> {
+        <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='kw'>if</span> <span class='ident'>n</span> <span class='op'>==</span> <span class='ident'>buf</span>.<span class='ident'>len</span>() <span class='op'>=&gt;</span> {
             <span class='kw'>match</span> <span class='ident'>from_utf8</span>(<span class='ident'>buf</span>) {
                 <span class='prelude-val'>Ok</span>(<span class='ident'>decoded</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>decoded</span>),
                 <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>DecodeStringError</span>::<span class='ident'>InvalidUtf8</span>(<span class='ident'>buf</span>, <span class='ident'>err</span>)),
             }
         }
-        <span class='prelude-val'>Err</span>((<span class='ident'>size</span>, <span class='ident'>ReadError</span>::<span class='ident'>UnexpectedEOF</span>)) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>DecodeStringError</span>::<span class='ident'>InvalidDataCopy</span>(<span class='kw-2'>&amp;</span><span class='ident'>buf</span>[..<span class='ident'>size</span>], <span class='ident'>ReadError</span>::<span class='ident'>UnexpectedEOF</span>)),
-        <span class='prelude-val'>Err</span>((_, <span class='ident'>err</span>)) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>DecodeStringError</span>::<span class='ident'>InvalidDataRead</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>err</span>))),
+        <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>DecodeStringError</span>::<span class='ident'>InvalidDataCopy</span>(<span class='kw-2'>&amp;</span><span class='ident'>buf</span>[..<span class='ident'>n</span>], <span class='ident'>ReadError</span>::<span class='ident'>UnexpectedEOF</span>)),
+        <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>DecodeStringError</span>::<span class='ident'>InvalidDataRead</span>(<span class='ident'>ReadError</span>::<span class='ident'>Io</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>err</span>)))),
     }
-<span class='comment'>//    match io::copy(&amp;mut rd.take(len as u64), &amp;mut cur) {</span>
-<span class='comment'>//        Ok(size) if size == len as u64 =&gt; {</span>
-<span class='comment'>//            // Release buffer owning from cursor.</span>
-<span class='comment'>//            let buf = cur.into_inner();</span>
-
-<span class='comment'>//            match from_utf8(buf) {</span>
-<span class='comment'>//                Ok(decoded) =&gt; Ok(decoded),</span>
-<span class='comment'>//                Err(err)    =&gt; Err(DecodeStringError::InvalidUtf8(buf, err)),</span>
-<span class='comment'>//            }</span>
-<span class='comment'>//        }</span>
-<span class='comment'>//        Ok(size) =&gt; {</span>
-<span class='comment'>//            let buf = cur.into_inner();</span>
-<span class='comment'>//            Err(DecodeStringError::InvalidDataCopy(&amp;buf[..size as usize], ReadError::UnexpectedEOF))</span>
-<span class='comment'>//        }</span>
-<span class='comment'>//        Err(err) =&gt; Err(DecodeStringError::InvalidDataRead(From::from(err))),</span>
-<span class='comment'>//    }</span>
 }
 
 <span class='doccomment'>/// Attempts to read and decode a string value from the reader, returning a borrowed slice from it.</span>
@@ -2523,8 +2585,8 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>FixedArray</span>(<span class='ident'>size</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>size</span> <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>Array16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>Array32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>Array16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>Array32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>))
     }
 }
@@ -2540,8 +2602,8 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>FixedMap</span>(<span class='ident'>size</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>size</span> <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>Map16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>Map32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>Map16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>Map32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>))
     }
 }
@@ -2551,9 +2613,9 @@
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>Bin8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>Bin16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
-        <span class='ident'>Marker</span>::<span class='ident'>Bin32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>))),
+        <span class='ident'>Marker</span>::<span class='ident'>Bin8</span>  <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>Bin16</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>),
+        <span class='ident'>Marker</span>::<span class='ident'>Bin32</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>))),
         <span class='ident'>marker</span>        <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>))
     }
 }
@@ -2589,8 +2651,8 @@
 {
     <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>FixExt1</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>ty</span>   <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i8</span>(<span class='ident'>rd</span>));
-            <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>));
+            <span class='kw'>let</span> <span class='ident'>ty</span>   <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>));
+            <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>));
             <span class='prelude-val'>Ok</span>((<span class='ident'>ty</span>, <span class='ident'>data</span>))
         }
         <span class='ident'>marker</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>))
@@ -2700,27 +2762,42 @@
 <span class='kw'>fn</span> <span class='ident'>read_fixext_data</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i8</span>, <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
-    <span class='kw'>let</span> <span class='ident'>id</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i8</span>(<span class='ident'>rd</span>));
+    <span class='kw'>let</span> <span class='ident'>id</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>));
 
     <span class='kw'>match</span> <span class='ident'>read_full</span>(<span class='ident'>rd</span>, <span class='ident'>buf</span>) {
-        <span class='prelude-val'>Ok</span>(())   <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>id</span>),
-        <span class='prelude-val'>Err</span>((_, <span class='ident'>err</span>)) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>InvalidDataRead</span>(<span class='ident'>err</span>)),
+        <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='kw'>if</span> <span class='ident'>n</span> <span class='op'>==</span> <span class='ident'>buf</span>.<span class='ident'>len</span>() <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>id</span>),
+        <span class='prelude-val'>Ok</span>(..)   <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>InvalidDataRead</span>(<span class='ident'>ReadError</span>::<span class='ident'>UnexpectedEOF</span>)),
+        <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>InvalidDataRead</span>(<span class='ident'>ReadError</span>::<span class='ident'>Io</span>(<span class='ident'>err</span>))),
     }
 }
 
-<span class='kw'>fn</span> <span class='ident'>read_full</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), (<span class='ident'>usize</span>, <span class='ident'>ReadError</span>)<span class='op'>&gt;</span> {
+<span class='doccomment'>/// Copies the contents of a reader into a buffer until fully filled.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// This function will continuously read data from `rd` and then write it into `buf` in a streaming</span>
+<span class='doccomment'>/// fashion until `rd` returns EOF.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// On success the total number of bytes that were copied from `rd` to `buf` is returned. Note, that</span>
+<span class='doccomment'>/// reaching EOF is not treated as error.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Errors</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// This function will return an error immediately if any call to `read` returns an error. All</span>
+<span class='doccomment'>/// instances of `ErrorKind::Interrupted` are handled by this function and the underlying operation</span>
+<span class='doccomment'>/// is retried.</span>
+<span class='kw'>fn</span> <span class='ident'>read_full</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span>, <span class='ident'>io</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+    <span class='comment'>// TODO: Maybe move this helper function into an independent module</span>
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>nread</span> <span class='op'>=</span> <span class='number'>0usize</span>;
 
     <span class='kw'>while</span> <span class='ident'>nread</span> <span class='op'>&lt;</span> <span class='ident'>buf</span>.<span class='ident'>len</span>() {
         <span class='kw'>match</span> <span class='ident'>rd</span>.<span class='ident'>read</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>[<span class='ident'>nread</span>..]) {
-            <span class='prelude-val'>Ok</span>(<span class='number'>0</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>((<span class='ident'>nread</span>, <span class='ident'>ReadError</span>::<span class='ident'>UnexpectedEOF</span>)),
+            <span class='prelude-val'>Ok</span>(<span class='number'>0</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>nread</span>),
             <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> <span class='ident'>nread</span> <span class='op'>+=</span> <span class='ident'>n</span>,
-            <span class='prelude-val'>Err</span>(<span class='kw-2'>ref</span> <span class='ident'>err</span>) <span class='kw'>if</span> <span class='ident'>err</span>.<span class='ident'>kind</span>() <span class='op'>==</span> <span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>Interrupted</span> <span class='op'>=&gt;</span> {},
-            <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>((<span class='ident'>nread</span>, <span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>err</span>)))
+            <span class='prelude-val'>Err</span>(<span class='kw-2'>ref</span> <span class='ident'>err</span>) <span class='kw'>if</span> <span class='ident'>err</span>.<span class='ident'>kind</span>() <span class='op'>==</span> <span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>Interrupted</span> <span class='op'>=&gt;</span> <span class='kw'>continue</span>,
+            <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>err</span>)
         }
     }
 
-    <span class='prelude-val'>Ok</span>(())
+    <span class='prelude-val'>Ok</span>(<span class='ident'>nread</span>)
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
@@ -2739,13 +2816,13 @@
         <span class='ident'>Marker</span>::<span class='ident'>FixExt4</span>  <span class='op'>=&gt;</span> <span class='number'>4</span>,
         <span class='ident'>Marker</span>::<span class='ident'>FixExt8</span>  <span class='op'>=&gt;</span> <span class='number'>8</span>,
         <span class='ident'>Marker</span>::<span class='ident'>FixExt16</span> <span class='op'>=&gt;</span> <span class='number'>16</span>,
-        <span class='ident'>Marker</span>::<span class='ident'>Ext8</span>     <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>u32</span>,
-        <span class='ident'>Marker</span>::<span class='ident'>Ext16</span>    <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>,
-        <span class='ident'>Marker</span>::<span class='ident'>Ext32</span>    <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>)),
+        <span class='ident'>Marker</span>::<span class='ident'>Ext8</span>     <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>u32</span>,
+        <span class='ident'>Marker</span>::<span class='ident'>Ext16</span>    <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>,
+        <span class='ident'>Marker</span>::<span class='ident'>Ext32</span>    <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>)),
         <span class='ident'>marker</span>           <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>))
     };
 
-    <span class='kw'>let</span> <span class='ident'>typeid</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i8</span>(<span class='ident'>rd</span>));
+    <span class='kw'>let</span> <span class='ident'>typeid</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>));
     <span class='kw'>let</span> <span class='ident'>meta</span> <span class='op'>=</span> <span class='ident'>ExtMeta</span> { <span class='ident'>typeid</span>: <span class='ident'>typeid</span>, <span class='ident'>size</span>: <span class='ident'>size</span> };
 
     <span class='prelude-val'>Ok</span>(<span class='ident'>meta</span>)
@@ -2770,16 +2847,7 @@
     <span class='ident'>ValueReadError</span>,
     <span class='ident'>DecodeStringError</span>,
     <span class='ident'>read_marker</span>,
-    <span class='ident'>read_data_u8</span>,
-    <span class='ident'>read_data_u16</span>,
-    <span class='ident'>read_data_u32</span>,
-    <span class='ident'>read_data_u64</span>,
-    <span class='ident'>read_data_i8</span>,
-    <span class='ident'>read_data_i16</span>,
-    <span class='ident'>read_data_i32</span>,
-    <span class='ident'>read_data_i64</span>,
-    <span class='ident'>read_data_f32</span>,
-    <span class='ident'>read_data_f64</span>,
+    <span class='ident'>read_numeric_data</span>,
     <span class='ident'>read_str_data</span>,
     <span class='ident'>read_full</span>,
 };
@@ -2881,15 +2949,16 @@
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>vec</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> <span class='op'>=</span> (<span class='number'>0</span>..<span class='ident'>len</span>).<span class='ident'>map</span>(<span class='op'>|</span>_<span class='op'>|</span> <span class='number'>0u8</span>).<span class='ident'>collect</span>();
 
     <span class='kw'>match</span> <span class='ident'>read_full</span>(<span class='ident'>rd</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>vec</span>[..]) {
-        <span class='prelude-val'>Ok</span>(()) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>vec</span>),
-        <span class='prelude-val'>Err</span>((_, <span class='ident'>err</span>)) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>InvalidDataRead</span>(<span class='ident'>err</span>)),
+        <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='kw'>if</span> <span class='ident'>n</span> <span class='op'>==</span> <span class='ident'>vec</span>.<span class='ident'>len</span>() <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>vec</span>),
+        <span class='prelude-val'>Ok</span>(..)   <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>InvalidDataRead</span>(<span class='ident'>ReadError</span>::<span class='ident'>UnexpectedEOF</span>)),
+        <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>InvalidDataRead</span>(<span class='ident'>ReadError</span>::<span class='ident'>Io</span>(<span class='ident'>err</span>))),
     }
 }
 
 <span class='kw'>fn</span> <span class='ident'>read_ext_body</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>, <span class='ident'>len</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(<span class='ident'>i8</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>), <span class='ident'>Error</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
-    <span class='kw'>let</span> <span class='ident'>ty</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i8</span>(<span class='ident'>rd</span>));
+    <span class='kw'>let</span> <span class='ident'>ty</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>));
     <span class='kw'>let</span> <span class='ident'>vec</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_bin_data</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
     <span class='prelude-val'>Ok</span>((<span class='ident'>ty</span>, <span class='ident'>vec</span>))
 }
@@ -2902,39 +2971,40 @@
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_value</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Value</span>, <span class='ident'>Error</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
+    <span class='comment'>// TODO: Looks creepy.</span>
     <span class='kw'>let</span> <span class='ident'>val</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
         <span class='ident'>Marker</span>::<span class='ident'>Null</span>  <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Nil</span>,
         <span class='ident'>Marker</span>::<span class='ident'>True</span>  <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Boolean</span>(<span class='boolval'>true</span>),
         <span class='ident'>Marker</span>::<span class='ident'>False</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Boolean</span>(<span class='boolval'>false</span>),
         <span class='ident'>Marker</span>::<span class='ident'>PositiveFixnum</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>U64</span>(<span class='ident'>val</span> <span class='kw'>as</span> <span class='ident'>u64</span>)),
         <span class='ident'>Marker</span>::<span class='ident'>NegativeFixnum</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>I64</span>(<span class='ident'>val</span> <span class='kw'>as</span> <span class='ident'>i64</span>)),
-        <span class='ident'>Marker</span>::<span class='ident'>U8</span>  <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>U64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u64</span>)),
-        <span class='ident'>Marker</span>::<span class='ident'>U16</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>U64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u64</span>)),
-        <span class='ident'>Marker</span>::<span class='ident'>U32</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>U64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u64</span>)),
-        <span class='ident'>Marker</span>::<span class='ident'>U64</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>U64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u64</span>(<span class='ident'>rd</span>)))),
-        <span class='ident'>Marker</span>::<span class='ident'>I8</span>  <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>I64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i8</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i64</span>)),
-        <span class='ident'>Marker</span>::<span class='ident'>I16</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>I64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i64</span>)),
-        <span class='ident'>Marker</span>::<span class='ident'>I32</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>I64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i32</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i64</span>)),
-        <span class='ident'>Marker</span>::<span class='ident'>I64</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>I64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_i64</span>(<span class='ident'>rd</span>)))),
-        <span class='ident'>Marker</span>::<span class='ident'>F32</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Float</span>(<span class='ident'>Float</span>::<span class='ident'>F32</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_f32</span>(<span class='ident'>rd</span>)))),
-        <span class='ident'>Marker</span>::<span class='ident'>F64</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Float</span>(<span class='ident'>Float</span>::<span class='ident'>F64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_f64</span>(<span class='ident'>rd</span>)))),
+        <span class='ident'>Marker</span>::<span class='ident'>U8</span>  <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>U64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>u64</span>)),
+        <span class='ident'>Marker</span>::<span class='ident'>U16</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>U64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u64</span>)),
+        <span class='ident'>Marker</span>::<span class='ident'>U32</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>U64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u32</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u64</span>)),
+        <span class='ident'>Marker</span>::<span class='ident'>U64</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>U64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>)))),
+        <span class='ident'>Marker</span>::<span class='ident'>I8</span>  <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>I64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>i8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>))  <span class='kw'>as</span> <span class='ident'>i64</span>)),
+        <span class='ident'>Marker</span>::<span class='ident'>I16</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>I64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>i16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i64</span>)),
+        <span class='ident'>Marker</span>::<span class='ident'>I32</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>I64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>i32</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>i64</span>)),
+        <span class='ident'>Marker</span>::<span class='ident'>I64</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>I64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>)))),
+        <span class='ident'>Marker</span>::<span class='ident'>F32</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Float</span>(<span class='ident'>Float</span>::<span class='ident'>F32</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>)))),
+        <span class='ident'>Marker</span>::<span class='ident'>F64</span> <span class='op'>=&gt;</span> <span class='ident'>Value</span>::<span class='ident'>Float</span>(<span class='ident'>Float</span>::<span class='ident'>F64</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>)))),
         <span class='ident'>Marker</span>::<span class='ident'>FixedString</span>(<span class='ident'>len</span>) <span class='op'>=&gt;</span> {
             <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>u32</span>;
             <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_str</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>String</span>(<span class='ident'>res</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Str8</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>;
             <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_str</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>String</span>(<span class='ident'>res</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Str16</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>u32</span>;
             <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_str</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>String</span>(<span class='ident'>res</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Str32</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>));
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>));
             <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_str</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>String</span>(<span class='ident'>res</span>)
         }
@@ -2944,12 +3014,12 @@
             <span class='ident'>Value</span>::<span class='ident'>Array</span>(<span class='ident'>vec</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Array16</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
             <span class='kw'>let</span> <span class='ident'>vec</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_array</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>Array</span>(<span class='ident'>vec</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Array32</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u32</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
             <span class='kw'>let</span> <span class='ident'>vec</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_array</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>Array</span>(<span class='ident'>vec</span>)
         }
@@ -2959,27 +3029,27 @@
             <span class='ident'>Value</span>::<span class='ident'>Map</span>(<span class='ident'>map</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Map16</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
             <span class='kw'>let</span> <span class='ident'>map</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_map</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>Map</span>(<span class='ident'>map</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Map32</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u32</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
             <span class='kw'>let</span> <span class='ident'>map</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_map</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>Map</span>(<span class='ident'>map</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Bin8</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
             <span class='kw'>let</span> <span class='ident'>vec</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_bin_data</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>Binary</span>(<span class='ident'>vec</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Bin16</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
             <span class='kw'>let</span> <span class='ident'>vec</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_bin_data</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>Binary</span>(<span class='ident'>vec</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Bin32</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u32</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
             <span class='kw'>let</span> <span class='ident'>vec</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_bin_data</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>Binary</span>(<span class='ident'>vec</span>)
         }
@@ -3009,17 +3079,17 @@
             <span class='ident'>Value</span>::<span class='ident'>Ext</span>(<span class='ident'>ty</span>, <span class='ident'>vec</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Ext8</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u8</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u8</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
             <span class='kw'>let</span> (<span class='ident'>ty</span>, <span class='ident'>vec</span>) <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_ext_body</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>Ext</span>(<span class='ident'>ty</span>, <span class='ident'>vec</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Ext16</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u16</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u16</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
             <span class='kw'>let</span> (<span class='ident'>ty</span>, <span class='ident'>vec</span>) <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_ext_body</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>Ext</span>(<span class='ident'>ty</span>, <span class='ident'>vec</span>)
         }
         <span class='ident'>Marker</span>::<span class='ident'>Ext32</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_data_u32</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
+            <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_numeric_data</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>u32</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>)) <span class='kw'>as</span> <span class='ident'>usize</span>;
             <span class='kw'>let</span> (<span class='ident'>ty</span>, <span class='ident'>vec</span>) <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_ext_body</span>(<span class='ident'>rd</span>, <span class='ident'>len</span>));
             <span class='ident'>Value</span>::<span class='ident'>Ext</span>(<span class='ident'>ty</span>, <span class='ident'>vec</span>)
         }
