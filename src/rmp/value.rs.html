@@ -137,28 +137,28 @@
     <span class='ident'>Ext</span>(<span class='ident'>i8</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>),
 }
 
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
-<span class='kw'>enum</span> <span class='ident'>ValueRef</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
-    <span class='doccomment'>/// Nil represents nil.</span>
-    <span class='ident'>Nil</span>,
-    <span class='doccomment'>/// Boolean represents true or false.</span>
-    <span class='ident'>Boolean</span>(<span class='ident'>bool</span>),
-    <span class='doccomment'>/// Integer represents an integer.</span>
-    <span class='ident'>Integer</span>(<span class='ident'>Integer</span>),
-    <span class='doccomment'>/// Float represents a floating point number.</span>
-    <span class='ident'>Float</span>(<span class='ident'>Float</span>),
-    <span class='doccomment'>/// String extending Raw type represents a UTF-8 string.</span>
-    <span class='ident'>String</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>),
-    <span class='doccomment'>/// Binary extending Raw type represents a byte array.</span>
-    <span class='ident'>Binary</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> [<span class='ident'>u8</span>]),
-    <span class='doccomment'>/// Array represents a sequence of objects.</span>
-    <span class='ident'>Array</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> [<span class='ident'>ValueRef</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>]),
-    <span class='doccomment'>/// Map represents key-value pairs of objects.</span>
-    <span class='ident'>Map</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> [(<span class='ident'>ValueRef</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>, <span class='ident'>ValueRef</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>)]),
-    <span class='doccomment'>/// Extended implements Extension interface: represents a tuple of type information and a byte</span>
-    <span class='doccomment'>/// array where type information is an integer whose meaning is defined by applications.</span>
-    <span class='ident'>Ext</span>(<span class='ident'>i8</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> [<span class='ident'>u8</span>]),
-}
+<span class='comment'>//#[derive(Clone, Debug, PartialEq)]</span>
+<span class='comment'>//enum ValueRef&lt;&#39;a&gt; {</span>
+<span class='comment'>//    /// Nil represents nil.</span>
+<span class='comment'>//    Nil,</span>
+<span class='comment'>//    /// Boolean represents true or false.</span>
+<span class='comment'>//    Boolean(bool),</span>
+<span class='comment'>//    /// Integer represents an integer.</span>
+<span class='comment'>//    Integer(Integer),</span>
+<span class='comment'>//    /// Float represents a floating point number.</span>
+<span class='comment'>//    Float(Float),</span>
+<span class='comment'>//    /// String extending Raw type represents a UTF-8 string.</span>
+<span class='comment'>//    String(&amp;&#39;a str),</span>
+<span class='comment'>//    /// Binary extending Raw type represents a byte array.</span>
+<span class='comment'>//    Binary(&amp;&#39;a [u8]),</span>
+<span class='comment'>//    /// Array represents a sequence of objects.</span>
+<span class='comment'>//    Array(&amp;&#39;a [ValueRef&lt;&#39;a&gt;]),</span>
+<span class='comment'>//    /// Map represents key-value pairs of objects.</span>
+<span class='comment'>//    Map(&amp;&#39;a [(ValueRef&lt;&#39;a&gt;, ValueRef&lt;&#39;a&gt;)]),</span>
+<span class='comment'>//    /// Extended implements Extension interface: represents a tuple of type information and a byte</span>
+<span class='comment'>//    /// array where type information is an integer whose meaning is defined by applications.</span>
+<span class='comment'>//    Ext(i8, &amp;&#39;a [u8]),</span>
+<span class='comment'>//}</span>
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
