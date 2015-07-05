@@ -1664,27 +1664,6 @@
 <span id="1622">1622</span>
 <span id="1623">1623</span>
 <span id="1624">1624</span>
-<span id="1625">1625</span>
-<span id="1626">1626</span>
-<span id="1627">1627</span>
-<span id="1628">1628</span>
-<span id="1629">1629</span>
-<span id="1630">1630</span>
-<span id="1631">1631</span>
-<span id="1632">1632</span>
-<span id="1633">1633</span>
-<span id="1634">1634</span>
-<span id="1635">1635</span>
-<span id="1636">1636</span>
-<span id="1637">1637</span>
-<span id="1638">1638</span>
-<span id="1639">1639</span>
-<span id="1640">1640</span>
-<span id="1641">1641</span>
-<span id="1642">1642</span>
-<span id="1643">1643</span>
-<span id="1644">1644</span>
-<span id="1645">1645</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>Read</span>;
@@ -2021,10 +2000,7 @@
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_u16</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span>, <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
-    <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>U16</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
-        <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
-    }
+    <span class='ident'>read_numeric</span>(<span class='ident'>rd</span>, <span class='ident'>Marker</span>::<span class='ident'>U16</span>)
 }
 
 <span class='doccomment'>/// Attempts to read exactly 5 bytes from the given reader and to decode them as `u32` value.</span>
@@ -2041,10 +2017,7 @@
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_u32</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u32</span>, <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
-    <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>U32</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
-        <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
-    }
+    <span class='ident'>read_numeric</span>(<span class='ident'>rd</span>, <span class='ident'>Marker</span>::<span class='ident'>U32</span>)
 }
 
 <span class='doccomment'>/// Attempts to read exactly 9 bytes from the given reader and to decode them as `u64` value.</span>
@@ -2061,10 +2034,7 @@
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_u64</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span>, <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
-    <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>U64</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
-        <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
-    }
+    <span class='ident'>read_numeric</span>(<span class='ident'>rd</span>, <span class='ident'>Marker</span>::<span class='ident'>U64</span>)
 }
 
 <span class='doccomment'>/// Attempts to read exactly 2 bytes from the given reader and to decode them as `i8` value.</span>
@@ -2081,10 +2051,7 @@
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_i8</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i8</span>, <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
-    <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>I8</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
-        <span class='ident'>marker</span>     <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
-    }
+    <span class='ident'>read_numeric</span>(<span class='ident'>rd</span>, <span class='ident'>Marker</span>::<span class='ident'>I8</span>)
 }
 
 <span class='doccomment'>/// Attempts to read exactly 3 bytes from the given reader and to decode them as `i16` value.</span>
@@ -2101,10 +2068,7 @@
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_i16</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i16</span>, <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
-    <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>I16</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
-        <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
-    }
+    <span class='ident'>read_numeric</span>(<span class='ident'>rd</span>, <span class='ident'>Marker</span>::<span class='ident'>I16</span>)
 }
 
 <span class='doccomment'>/// Attempts to read exactly 5 bytes from the given reader and to decode them as `i32` value.</span>
@@ -2121,10 +2085,7 @@
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_i32</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i32</span>, <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
-    <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>I32</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
-        <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
-    }
+    <span class='ident'>read_numeric</span>(<span class='ident'>rd</span>, <span class='ident'>Marker</span>::<span class='ident'>I32</span>)
 }
 
 <span class='doccomment'>/// Attempts to read exactly 9 bytes from the given reader and to decode them as `i64` value.</span>
@@ -2141,10 +2102,7 @@
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_i64</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span>, <span class='ident'>ValueReadError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
 {
-    <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_marker</span>(<span class='ident'>rd</span>)) {
-        <span class='ident'>Marker</span>::<span class='ident'>I64</span> <span class='op'>=&gt;</span> <span class='ident'>read_numeric_data</span>(<span class='ident'>rd</span>).<span class='ident'>map_err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>),
-        <span class='ident'>marker</span>      <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValueReadError</span>::<span class='ident'>TypeMismatch</span>(<span class='ident'>marker</span>)),
-    }
+    <span class='ident'>read_numeric</span>(<span class='ident'>rd</span>, <span class='ident'>Marker</span>::<span class='ident'>I64</span>)
 }
 
 <span class='doccomment'>/// Attempts to read up to 2 bytes from the given reader and to decode them as `u8` value.</span>

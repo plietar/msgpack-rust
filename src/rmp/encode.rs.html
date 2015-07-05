@@ -1095,7 +1095,6 @@
 <span id="1053">1053</span>
 <span id="1054">1054</span>
 <span id="1055">1055</span>
-<span id="1056">1056</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>convert</span>::<span class='ident'>From</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
@@ -1899,13 +1898,14 @@
 <span class='kw'>use</span> <span class='ident'>super</span>::{
     <span class='ident'>WriteError</span>,
     <span class='ident'>FixedValueWriteError</span>,
+    <span class='ident'>ValueWriteError</span>,
 };
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Error</span> {
     <span class='doccomment'>/// Failed to write MessagePack&#39;ed single-byte value into the write.</span>
     <span class='ident'>InvalidFixedValueWrite</span>(<span class='ident'>WriteError</span>),
-    <span class='ident'>Unimplemented</span>,
+    <span class='ident'>InvalidValueWrite</span>(<span class='ident'>ValueWriteError</span>),
 }
 
 <span class='kw'>impl</span> <span class='ident'>From</span><span class='op'>&lt;</span><span class='ident'>FixedValueWriteError</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Error</span> {
@@ -1916,11 +1916,9 @@
     }
 }
 
-<span class='kw'>impl</span> <span class='ident'>From</span><span class='op'>&lt;</span><span class='ident'>super</span>::<span class='ident'>ValueWriteError</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Error</span> {
-    <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>err</span>: <span class='ident'>super</span>::<span class='ident'>ValueWriteError</span>) <span class='op'>-&gt;</span> <span class='ident'>Error</span> {
-        <span class='kw'>match</span> <span class='ident'>err</span> {
-            _ <span class='op'>=&gt;</span> <span class='ident'>Error</span>::<span class='ident'>Unimplemented</span>,
-        }
+<span class='kw'>impl</span> <span class='ident'>From</span><span class='op'>&lt;</span><span class='ident'>ValueWriteError</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Error</span> {
+    <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>err</span>: <span class='ident'>ValueWriteError</span>) <span class='op'>-&gt;</span> <span class='ident'>Error</span> {
+        <span class='ident'>Error</span>::<span class='ident'>InvalidValueWrite</span>(<span class='ident'>err</span>)
     }
 }
 

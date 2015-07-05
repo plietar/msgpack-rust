@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-6892' class='srclink' href='../../src/rmp/decode.rs.html#477-485' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-6719' class='srclink' href='../../src/rmp/decode.rs.html#456-464' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn read_u8_loosely&lt;R&gt;(rd: &amp;mut R) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, <a class='enum' href='../../rmp/decode/enum.ValueReadError.html' title='rmp::decode::ValueReadError'>ValueReadError</a>&gt; <span class='where'>where R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a></span></pre><div class='docblock'><p>Attempts to read up to 2 bytes from the given reader and to decode them as <code>u8</code> value.</p>
 
 <p>Unlike the <code>read_u8</code>, this function weakens type restrictions, allowing you to safely decode
