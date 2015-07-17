@@ -45,12 +45,14 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-9826' class='srclink' href='../../../src/rmp/decode.rs.html#1187-1316' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-10543' class='srclink' href='../../../src/rmp/decode.rs.html#1498-1627' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn read_value&lt;R&gt;(rd: &amp;mut R) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='../../../rmp/encode/value/enum.Value.html' title='rmp::encode::value::Value'>Value</a>, <a class='enum' href='../../../rmp/decode/value/enum.Error.html' title='rmp::decode::value::Error'>Error</a>&gt; <span class='where'>where R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a></span></pre><div class='docblock'><p>Attempts to read bytes from the given reader and interpret them as a <code>Value</code>.</p>
 
 <h1 id="errors" class='section-header'><a
                            href="#errors">Errors</a></h1>
-<p>This function will return <code>Error</code> on any I/O error while either reading or decoding a <code>Value</code>.</p>
+<p>This function will return <code>Error</code> on any I/O error while either reading or decoding a <code>Value</code>.
+All instances of <code>ErrorKind::Interrupted</code> are handled by this function and the underlying
+operation is retried.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 

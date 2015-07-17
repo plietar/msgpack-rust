@@ -45,8 +45,19 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-5555' class='srclink' href='../../src/rmp/decode.rs.html#1-1624' title='goto source code'>[src]</a></span></h1>
-<h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
+        </span><a id='src-5841' class='srclink' href='../../src/rmp/decode.rs.html#1-1965' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'>
+<h1 id="note" class='section-header'><a
+                           href="#note">Note</a></h1>
+<p>Most of the function defined in this module will silently handle interruption error (EINTR)
+received from the given <code>Read</code> to be in consistent state with the <code>Write::write_all</code> method in
+the standard library.</p>
+
+<p>Any other error would immediately interrupt the parsing process. If your reader can results in
+I/O error and simultaneously be a recoverable state (for example, when reading from
+non-blocking socket and it returns EWOULDBLOCK) be sure that you buffer the data externally
+to avoid data loss (using <code>BufRead</code> readers with manual consuming or some other way).</p>
+</div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use self::<a class='mod'
                                             href='./value/index.html'>value</a>::<a class='fn' href='../../rmp/decode/value/fn.read_value.html' title='rmp::decode::value::read_value'>read_value</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
@@ -138,6 +149,8 @@ array size.</p>
                                title='rmp::decode::read_bin_borrow'>read_bin_borrow</a></td>
                         <td class='docblock short'>
                              
+<h1 id="note" class='section-header'><a
+                           href="#note">Note</a></h1>
                         </td>
                     </tr>
                 
@@ -146,6 +159,8 @@ array size.</p>
                                title='rmp::decode::read_bin_len'>read_bin_len</a></td>
                         <td class='docblock short'>
                              
+<h1 id="note" class='section-header'><a
+                           href="#note">Note</a></h1>
                         </td>
                     </tr>
                 

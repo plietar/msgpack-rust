@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-1518' class='srclink' href='../../src/rmp/encode.rs.html#1-1055' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-1518' class='srclink' href='../../src/rmp/encode.rs.html#1-1175' title='goto source code'>[src]</a></span></h1>
 <h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                     <tr class=' module-item'>
@@ -110,6 +110,15 @@ the write.</p>
                         <td class='docblock short'>
                              <p>Encodes and attempts to write the most efficient array length implementation to the given write,
 returning the marker used.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_bin.html'
+                               title='rmp::encode::write_bin'>write_bin</a></td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write the most efficient binary implementation to the given <code>Write</code>.</p>
 
                         </td>
                     </tr>
@@ -242,6 +251,15 @@ given write.</p>
                         <td class='docblock short'>
                              <p>Encodes and attempts to write an <code>i64</code> value into the given write using the most efficient
 representation, returning the marker used.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.write_str.html'
+                               title='rmp::encode::write_str'>write_str</a></td>
+                        <td class='docblock short'>
+                             <p>Encodes and attempts to write the most efficient string implementation to the given <code>Write</code>.</p>
 
                         </td>
                     </tr>

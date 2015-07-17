@@ -45,10 +45,15 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-11338' class='srclink' href='../../../src/rmp/decode.rs.html#1400-1402' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-12122' class='srclink' href='../../../src/rmp/decode.rs.html#1738-1740' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Decoder&lt;R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a>&gt; {
     // some fields omitted
-}</pre><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a>&gt; <a class='struct' href='../../../rmp/decode/serialize/struct.Decoder.html' title='rmp::decode::serialize::Decoder'>Decoder</a>&lt;R&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(rd: R) -&gt; <a class='struct' href='../../../rmp/decode/serialize/struct.Decoder.html' title='rmp::decode::serialize::Decoder'>Decoder</a>&lt;R&gt;</code></h4>
+}</pre><div class='docblock'>
+<h1 id="note" class='section-header'><a
+                           href="#note">Note</a></h1>
+<p>All instances of <code>ErrorKind::Interrupted</code> are handled by this function and the underlying
+operation is retried.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a>&gt; <a class='struct' href='../../../rmp/decode/serialize/struct.Decoder.html' title='rmp::decode::serialize::Decoder'>Decoder</a>&lt;R&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(rd: R) -&gt; <a class='struct' href='../../../rmp/decode/serialize/struct.Decoder.html' title='rmp::decode::serialize::Decoder'>Decoder</a>&lt;R&gt;</code></h4>
 </div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a>&gt; <a class='trait' href='http://doc.rust-lang.org/rustc-serialize/rustc_serialize/serialize/trait.Decoder.html' title='rustc_serialize::serialize::Decoder'>Decoder</a> for <a class='struct' href='../../../rmp/decode/serialize/struct.Decoder.html' title='rmp::decode::serialize::Decoder'>Decoder</a>&lt;R&gt;</code></h3><div class='docblock'><p>Unstable: docs; examples; incomplete</p>
 </div><div class='impl-items'><h4 id='assoc_type.Error' class='type'><code>type Error = <a class='enum' href='../../../rmp/decode/serialize/enum.Error.html' title='rmp::decode::serialize::Error'>Error</a></code></h4>
 <h4 id='method.read_nil' class='method'><code>fn <a href='http://doc.rust-lang.org/rustc-serialize/rustc_serialize/serialize/trait.Decoder.html#method.read_nil' class='fnname'>read_nil</a>(&amp;mut self) -&gt; <a class='type' href='../../../rmp/decode/serialize/type.Result.html' title='rmp::decode::serialize::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>

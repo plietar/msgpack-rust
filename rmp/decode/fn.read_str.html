@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-7741' class='srclink' href='../../src/rmp/decode.rs.html#752-763' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-8358' class='srclink' href='../../src/rmp/decode.rs.html#1006-1017' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn read_str&lt;'r, R&gt;(rd: &amp;mut R, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'r mut [</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;&amp;'r <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, <a class='enum' href='../../rmp/decode/enum.DecodeStringError.html' title='rmp::decode::DecodeStringError'>DecodeStringError</a>&lt;'r&gt;&gt; <span class='where'>where R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a></span></pre><div class='docblock'><p>Attempts to read a string data from the given reader and copy it to the buffer provided.</p>
 
 <p>On success returns a borrowed string type, allowing to view the copyed bytes as properly utf-8
@@ -57,7 +57,8 @@ According to the spec, the string&#39;s data must to be encoded using utf-8.</p>
 <p>Returns <code>Err</code> in the following cases:</p>
 
 <ul>
-<li>if any IO error (including unexpected EOF) occurs, while reading an <code>rd</code>.</li>
+<li>if any IO error (including unexpected EOF) occurs, while reading an <code>rd</code>, except the EINTR,
+which is handled internally.</li>
 <li>if the <code>out</code> buffer size is not large enough to keep all the data copyed.</li>
 <li>if the data is not utf-8, with a description as to why the provided data is not utf-8 and
 with a size of bytes actually copyed to be able to get them from <code>out</code>.</li>
@@ -76,6 +77,11 @@ with a size of bytes actually copyed to be able to get them from <code>out</code
 <h1 id="unstable" class='section-header'><a
                            href="#unstable">Unstable</a></h1>
 <p>This function is <strong>unstable</strong>, because it needs review.</p>
+
+<h1 id="note" class='section-header'><a
+                           href="#note">Note</a></h1>
+<p>This function will silently retry on every EINTR received from the underlying <code>Read</code> until
+successful read.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 
