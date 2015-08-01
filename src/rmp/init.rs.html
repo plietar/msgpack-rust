@@ -183,6 +183,11 @@
 <span id="141">141</span>
 <span id="142">142</span>
 <span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
 </pre><pre class='rust '>
 <span class='kw'>const</span> <span class='ident'>FIXSTR_SIZE</span>   : <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>0x1f</span>;
 <span class='kw'>const</span> <span class='ident'>FIXARRAY_SIZE</span> : <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>0x0f</span>;
@@ -190,7 +195,9 @@
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Copy</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Marker</span> {
+    <span class='comment'>// TODO: Possibly will be renamed to `FixPos`.</span>
     <span class='ident'>PositiveFixnum</span>(<span class='ident'>u8</span>),
+    <span class='comment'>// TODO: Possibly will be renamed to `FixNeg`.</span>
     <span class='ident'>NegativeFixnum</span>(<span class='ident'>i8</span>),
     <span class='ident'>Null</span>,
     <span class='ident'>True</span>,
@@ -205,6 +212,7 @@
     <span class='ident'>I64</span>,
     <span class='ident'>F32</span>,
     <span class='ident'>F64</span>,
+    <span class='comment'>// TODO: Possibly will be renamed to `FixStr`.</span>
     <span class='ident'>FixedString</span>(<span class='ident'>u8</span>),
     <span class='ident'>Str8</span>,
     <span class='ident'>Str16</span>,
@@ -212,9 +220,11 @@
     <span class='ident'>Bin8</span>,
     <span class='ident'>Bin16</span>,
     <span class='ident'>Bin32</span>,
+    <span class='comment'>// TODO: Possibly will be renamed to `FixArray`.</span>
     <span class='ident'>FixedArray</span>(<span class='ident'>u8</span>),
     <span class='ident'>Array16</span>,
     <span class='ident'>Array32</span>,
+    <span class='comment'>// TODO: Possibly will be renamed to `FixMap`.</span>
     <span class='ident'>FixedMap</span>(<span class='ident'>u8</span>),
     <span class='ident'>Map16</span>,
     <span class='ident'>Map32</span>,

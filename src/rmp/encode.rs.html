@@ -1201,20 +1201,6 @@
 <span id="1159">1159</span>
 <span id="1160">1160</span>
 <span id="1161">1161</span>
-<span id="1162">1162</span>
-<span id="1163">1163</span>
-<span id="1164">1164</span>
-<span id="1165">1165</span>
-<span id="1166">1166</span>
-<span id="1167">1167</span>
-<span id="1168">1168</span>
-<span id="1169">1169</span>
-<span id="1170">1170</span>
-<span id="1171">1171</span>
-<span id="1172">1172</span>
-<span id="1173">1173</span>
-<span id="1174">1174</span>
-<span id="1175">1175</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>convert</span>::<span class='ident'>From</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>error</span>::<span class='ident'>Error</span>;
@@ -1227,6 +1213,9 @@
 <span class='kw'>use</span> <span class='ident'>byteorder</span>::<span class='ident'>WriteBytesExt</span>;
 
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>Marker</span>;
+
+<span class='attribute'>#[<span class='ident'>path</span> <span class='op'>=</span> <span class='string'>&quot;encode/value_ref.rs&quot;</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>value_ref</span>;
 
 <span class='doccomment'>/// Represents an error that can occur when attempting to write MessagePack&#39;ed value into the write.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -2035,12 +2024,14 @@
     <span class='kw'>match</span> <span class='ident'>val</span> {
         <span class='kw-2'>&amp;</span><span class='ident'>Value</span>::<span class='ident'>Nil</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>write_nil</span>(<span class='ident'>wr</span>)),
         <span class='kw-2'>&amp;</span><span class='ident'>Value</span>::<span class='ident'>Boolean</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>write_bool</span>(<span class='ident'>wr</span>, <span class='ident'>val</span>)),
+        <span class='comment'>// TODO: Replace with generic write_int(...).</span>
         <span class='kw-2'>&amp;</span><span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>U64</span>(<span class='ident'>val</span>)) <span class='op'>=&gt;</span> {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>write_uint</span>(<span class='ident'>wr</span>, <span class='ident'>val</span>));
         }
         <span class='kw-2'>&amp;</span><span class='ident'>Value</span>::<span class='ident'>Integer</span>(<span class='ident'>Integer</span>::<span class='ident'>I64</span>(<span class='ident'>val</span>)) <span class='op'>=&gt;</span> {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>write_sint</span>(<span class='ident'>wr</span>, <span class='ident'>val</span>));
         }
+        <span class='comment'>// TODO: Replace with generic write_float(...).</span>
         <span class='kw-2'>&amp;</span><span class='ident'>Value</span>::<span class='ident'>Float</span>(<span class='ident'>Float</span>::<span class='ident'>F32</span>(<span class='ident'>val</span>)) <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>write_f32</span>(<span class='ident'>wr</span>, <span class='ident'>val</span>)),
         <span class='kw-2'>&amp;</span><span class='ident'>Value</span>::<span class='ident'>Float</span>(<span class='ident'>Float</span>::<span class='ident'>F64</span>(<span class='ident'>val</span>)) <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>write_f64</span>(<span class='ident'>wr</span>, <span class='ident'>val</span>)),
         <span class='kw-2'>&amp;</span><span class='ident'>Value</span>::<span class='ident'>String</span>(<span class='kw-2'>ref</span> <span class='ident'>val</span>) <span class='op'>=&gt;</span> {
@@ -2071,26 +2062,7 @@
     <span class='prelude-val'>Ok</span>(())
 }
 
-<span class='comment'>// TODO: Move tests outside.</span>
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
-<span class='kw'>mod</span> <span class='ident'>tests</span> {
-
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='op'>*</span>;
-
-<span class='attribute'>#[<span class='ident'>test</span>]</span>
-<span class='kw'>fn</span> <span class='ident'>pack_nil</span>() {
-    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> [<span class='number'>0x00</span>];
-
-    <span class='kw'>let</span> <span class='ident'>val</span> <span class='op'>=</span> <span class='ident'>Value</span>::<span class='ident'>Nil</span>;
-
-    <span class='ident'>write_value</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>[..], <span class='kw-2'>&amp;</span><span class='ident'>val</span>).<span class='ident'>unwrap</span>();
-
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>([<span class='number'>0xc0</span>], <span class='ident'>buf</span>);
-}
-
-}
-
-}
+} <span class='comment'>// mod value</span>
 
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>serialize</span> {
 

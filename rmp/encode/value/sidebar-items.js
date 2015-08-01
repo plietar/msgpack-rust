@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Error",""],["Float",""],["Integer",""],["Value",""]],"fn":[["write_value","Note"]]});
+initSidebarItems({"enum":[["Error",""]],"fn":[["write_value","Note"]]});

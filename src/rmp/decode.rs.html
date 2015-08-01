@@ -2005,6 +2005,12 @@
 <span id="1963">1963</span>
 <span id="1964">1964</span>
 <span id="1965">1965</span>
+<span id="1966">1966</span>
+<span id="1967">1967</span>
+<span id="1968">1968</span>
+<span id="1969">1969</span>
+<span id="1970">1970</span>
+<span id="1971">1971</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # Note</span>
 <span class='doccomment'>//!</span>
@@ -2032,6 +2038,10 @@
 
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>Marker</span>;
 
+<span class='attribute'>#[<span class='ident'>path</span> <span class='op'>=</span> <span class='string'>&quot;decode/value_ref.rs&quot;</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>value_ref</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>value_ref</span>::<span class='ident'>read_value_ref</span>;
+
 <span class='doccomment'>/// Represents an error that can occur when attempting to read bytes from the reader.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// This is a thin wrapper over the standard `io::Error` type. Namely, it adds one additional error</span>
@@ -2048,6 +2058,7 @@
     <span class='kw'>fn</span> <span class='ident'>description</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
             <span class='ident'>ReadError</span>::<span class='ident'>UnexpectedEOF</span> <span class='op'>=&gt;</span> <span class='string'>&quot;unexpected end of file while reading MessagePack value&quot;</span>,
+            <span class='comment'>// TODO: Probably we should give here a short description that I/O error occurs.</span>
             <span class='ident'>ReadError</span>::<span class='ident'>Io</span>(<span class='kw-2'>ref</span> <span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='ident'>err</span>.<span class='ident'>description</span>(),
         }
     }
@@ -3046,6 +3057,7 @@
 <span class='doccomment'>///</span>
 <span class='comment'>// TODO: it is better to return &amp;str; may panic on len mismatch; extend documentation.</span>
 <span class='comment'>// TODO: Also it&#39;s possible to implement all borrowing functions for all `BufRead` implementors.</span>
+<span class='comment'>// TODO: It&#39;s not necessary to use cursor, use slices instead.</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_str_ref</span>(<span class='ident'>rd</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>], <span class='ident'>DecodeStringError</span><span class='op'>&gt;</span> {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cur</span> <span class='op'>=</span> <span class='ident'>io</span>::<span class='ident'>Cursor</span>::<span class='ident'>new</span>(<span class='ident'>rd</span>);
     <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_str_len</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>cur</span>));
