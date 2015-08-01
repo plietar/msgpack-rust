@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/rmp/lib.rs.html#1-141' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/rmp/lib.rs.html#1-136' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'>
 <h1 id="the-rust-messagepack-library" class='section-header'><a
                            href="#the-rust-messagepack-library">The Rust MessagePack Library</a></h1>
@@ -159,13 +159,6 @@ shown in the following example:</p>
     <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>val</span>, <span class='ident'>res</span>);
 }
 </pre>
-
-<h2 id="limitations-and-plans" class='section-header'><a
-                           href="#limitations-and-plans">Limitations and plans</a></h2>
-<ul>
-<li>Non-owning <code>ValueRef</code> variant, which can be created from <code>[u8]</code>, <code>Cursor&lt;[u8]&gt;</code> etc. and
-borrows data from it, which makes it absolute zero-copy.</li>
-</ul>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use decode::serialize::<a class='struct' href='../rmp/decode/serialize/struct.Decoder.html' title='rmp::decode::serialize::Decoder'>Decoder</a>;</code></td></tr><tr><td><code>pub use encode::serialize::<a class='struct' href='../rmp/encode/serialize/struct.Encoder.html' title='rmp::encode::serialize::Encoder'>Encoder</a>;</code></td></tr><tr><td><code>pub use value::{<a class='enum' href='../rmp/value/enum.Value.html' title='rmp::value::Value'>Value</a>, <a class='enum' href='../rmp/value/enum.ValueRef.html' title='rmp::value::ValueRef'>ValueRef</a>};</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
