@@ -176,6 +176,16 @@
 <span id="134">134</span>
 <span id="135">135</span>
 <span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # The Rust MessagePack Library</span>
 <span class='doccomment'>//!</span>
@@ -191,7 +201,7 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```toml</span>
 <span class='doccomment'>//! [dependencies.rmp]</span>
-<span class='doccomment'>//! rmp = &quot;0.5.0&quot;</span>
+<span class='doccomment'>//! rmp = &quot;0.5.1&quot;</span>
 <span class='doccomment'>//! ```</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! Then, add this to your crate root:</span>
@@ -208,6 +218,11 @@
 <span class='doccomment'>//!   full control on data encoding/decoding process and makes no heap allocations. On the other hand</span>
 <span class='doccomment'>//!   there are high-level API, which provides you convenient interface using Rust standard library and</span>
 <span class='doccomment'>//!   compiler reflection, allowing to encode/decode structures using `derive` attribute.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! - **Zero-copy value decoding**</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//!   RMP allows to decode bytes from a buffer in a zero-copy manner easily and blazingly fast, while Rust</span>
+<span class='doccomment'>//!   static checks guarantees that the data will be valid until buffer lives.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! - **Clear error handling**</span>
 <span class='doccomment'>//!</span>
@@ -298,6 +313,8 @@
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>byteorder</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rustc_serialize</span> <span class='kw'>as</span> <span class='ident'>serialize</span>;
 
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>serde</span>;
+
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>encode</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>decode</span>;
 
@@ -309,6 +326,9 @@
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>decode</span>::<span class='ident'>serialize</span>::<span class='ident'>Decoder</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>encode</span>::<span class='ident'>serialize</span>::<span class='ident'>Encoder</span>;
+
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>decode</span>::<span class='ident'>serde</span>::<span class='ident'>Deserializer</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>encode</span>::<span class='ident'>serde</span>::<span class='ident'>Serializer</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>init</span>::<span class='ident'>Marker</span>;
 
