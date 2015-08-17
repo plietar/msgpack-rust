@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Error",""]],"fn":[["write_value","Note"]]});
+initSidebarItems({"enum":[["Error",""]],"fn":[["write_value","Encodes and attempts to write the most efficient representation of the given Value."]]});
