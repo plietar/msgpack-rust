@@ -900,3 +900,5 @@ pub fn write_value<W>(wr: &mut W, val: &Value) -> Result<(), Error>
 }
 
 } // mod value
+
+pub use self::value::write_value;
