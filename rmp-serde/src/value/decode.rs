@@ -114,7 +114,7 @@ impl serde::Deserializer for Deserializer {
 
         let value = match self.value.take() {
             Some(value) => value,
-            None => { return Err(serde::de::Error::end_of_stream()); }
+            None => return Err(serde::de::Error::end_of_stream()),
         };
 
         match value {
@@ -140,6 +140,17 @@ impl serde::Deserializer for Deserializer {
                 value: None,
             }),
             Ext(_, _) => unimplemented!(),
+        }
+    }
+
+    #[inline]
+    fn deserialize_option<V>(&mut self, mut visitor: V) -> Result<V::Value>
+        where V: serde::de::Visitor
+    {
+        match self.value {
+            Some(Value::Nil) => visitor.visit_none(),
+            Some(_) => visitor.visit_some(self),
+            None => Err(serde::de::Error::end_of_stream()),
         }
     }
 }
